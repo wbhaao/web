@@ -1,27 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Document</title>
+    <style>
+        button{
+          text-align: center;
+        }
+        #container{
+            width:100%;
+            background-color:#ddd;
+        }
+        #pbar{
+            width: 0;
+            height: 30px;
+            line-height:30px;
+            background-color: #8c9cec;
+            text-align: center;
+        }
+    </style>
+</head>
 <body>
-  <h2>What Can JavaScript Do?</h2>
-  <p>JavaScript can change HTML attribute values.</p>
-  <p>
-    In this case JavaScript changes the value of the src (source) attribute of
-    an image.
-  </p>
+    <div id="container">
+        <div id="pbar"></div>
+    </div>
+    <br>
+   <button type="button" onclick="pstart()">progress</button>
+<script>
+    let i=0;
+    function pstart(){
+        if (i==0){
+            let pbarDiv = document.getElementById('pbar')//#pbar요소를 객체 변수로 저장
+            let pbarWidth = 0;
+            let id = setInterval(frame,100);//frame()함수를 100밀리초마다 실행
+            function frame(){
+                if (pbarWidth >= 100){ //종료 조건
+                    clearInterval(id);//setInterval 종료
+                    i=0;
+                }
+                else{
+                    pbarWidth++;
+                    pbarDiv.style.width= pbarWidth+"%";//상태표시줄 div 너비를 저장
+                    pbarDiv.innerHTML = pbarWidth + "%";
+                }
+            }
+        }
+    }
+   </script>
 
-  <button id="on" onclick="turnOn()">Turn on</button>
-  <!--태그의 이벤트 리스너 속성에 함수 등록-->
-  <img id="myImage" src="./img/off.png" style="width: 300px" />
-  <button id="off" onclick="turnOff()">Turn off</button
-  ><!--태그의 이벤트 리스너 속성에 함수 등록-->
-  <script>
-    onBtn = document.getElementById("on"); //버튼 객체요소를 변수에 저장
-    offBtn = document.getElementById("off"); //버튼 객체요소를 변수에 저장
-    lightImg = document.getElementById("myImage"); //이미지 객체요소를 변수에 저장
-    function turnOn() {
-      //이벤트 리스너 함수 정의
-      lightImg.src = "./img/on.png";
-    }
-    function turnOff() {
-      //이벤트 리스너 함수 정의
-      lightImg.src = "./img/off.png";
-    }
-  </script>
 </body>
